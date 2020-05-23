@@ -1,8 +1,8 @@
-import FileIn
+#Este es el main del proyecto
 from BraiNerdPanel import BraiNerdPanel
 import wx
 import wx.lib.agw.fourwaysplitter as fws
-
+#Main manda llamar todos los demás modulos de python para que sean visibles y añadidos al procesamiento necesario para el correcto funcionamiento del programa.
 class Main(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, title = "Brainerds",size = (1000,800))
@@ -29,9 +29,20 @@ class Main(wx.Frame):
         betaPanel.ShowBetaPanel()
         deltaPanel.ShowDeltaPanel()
 
-
+#Comprueba que éste archivo sea el main ejecutable para poder ejecutarlo
 if __name__ == "__main__":
     app = wx.App()
     frame = Main()
     frame.Show()
     app.MainLoop()
+
+
+"""
+extension = 96 lineas
+densidad de defectos = 1/96
+tiempo para corregir defectos = aproximadamente 1/2 hora
+porcentaje libre de defectos = 25%
+dedicacion = 8/2 = 4
+productividad = 96 / 8 = 12
+
+"""
