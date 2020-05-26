@@ -113,6 +113,10 @@ class BraiNerdPanel(wx.Panel):
         self.SetAngleElectrode(angle)
         self.SetRElectrode(r)
         self.PutGraphIn()
+        self.Bind(wx.EVT_LEFT_UP, self.onClick)
+
+    def onClick(self, event):
+        print ("click")
 
         
     #Mostrar el panel que contiene al segundo cuadrante con la grafica que representa las ondas Alpha.
