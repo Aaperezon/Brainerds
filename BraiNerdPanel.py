@@ -25,7 +25,6 @@ class BraiNerdPanel(wx.Panel):
         self.theta = 0
         
         
-    
     #Mostrar el panel que contiene al menú.
     def ShowMenuPanel(self):
         self.SetBackgroundColour(wx.Colour(121,255,255,0))
@@ -37,8 +36,8 @@ class BraiNerdPanel(wx.Panel):
         image = wx.ImageFromBitmap(bitmap)
         image = image.Scale(80, 80, wx.IMAGE_QUALITY_HIGH)
         result = wx.BitmapFromImage(image)
-        control = wx.StaticBitmap(self, -1, result)
-        control.SetPosition((450, 0))
+        self.control = wx.StaticBitmap(self, -1, result)
+        self.control.SetPosition((450, 0))
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickInicio, self.inicio) 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickConfiguracion, self.configuracion) 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickGuardar, self.guardar) 
@@ -56,7 +55,23 @@ class BraiNerdPanel(wx.Panel):
     def OnButtonClickGuardar(self, event):
         self.SetBackgroundColour('Red')
         self.Refresh()
-  
+    def UpdateMenu(self):
+        X,Y = self.GetSizeTuple()
+        Y = Y-30
+        if(X>=0):
+            iniX = (X/2)-300
+            confX = (X/2)-150
+            guaX = (X/2)+10
+            ptsMonX = (X/2)+160
+            self.inicio.SetPosition(wx.Point(iniX,Y))
+            self.configuracion.SetPosition(wx.Point(confX,Y))
+            self.guardar.SetPosition(wx.Point(guaX,Y))
+            self.puntosMon.SetPosition(wx.Point(ptsMonX,Y))
+            self.control.SetPosition(((X/2)-40, 0))
+       
+
+       
+
     def OnButtonClickPuntos(self, event):
         self.SetBackgroundColour('Pink')
         self.Refresh()

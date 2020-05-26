@@ -27,6 +27,7 @@ class Main(wx.Frame):
         splitterTABD.AppendWindow(self.deltaPanel)
         splitter.SetMinimumPaneSize(120)
 
+
         self.menuPanel.ShowMenuPanel()
         self.thetaPanel.ShowThetaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
         self.alphaPanel.ShowAlphaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
@@ -44,7 +45,8 @@ class Main(wx.Frame):
         self.alphaPanel.UpdateValues(self.wave)
         self.betaPanel.UpdateValues(self.wave)
         self.deltaPanel.UpdateValues(self.wave)
-        #print (self.electrodos.GetElectrodosAngle())
+        self.menuPanel.UpdateMenu()
+        #print (self.menuPanel.GetSize())
 
 
 #Comprueba que éste archivo sea el main ejecutable para poder ejecutarlo
