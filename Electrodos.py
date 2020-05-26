@@ -9,7 +9,7 @@ class Electrodos():
         #Lista de la posicion de cada electrodo (Θ,r) coordenadas polares
         #1
         self.electrodosAngle[0] = 0;
-        self.electrodosR[0] = .5
+        self.electrodosR[0] = 0
         #2
         self.electrodosAngle[1] = 0;
         self.electrodosR[1] = .5

@@ -56,7 +56,7 @@ class BraiNerdPanel(wx.Panel):
         self.SetBackgroundColour('Red')
         self.Refresh()
     def UpdateMenu(self):
-        X,Y = self.GetSizeTuple()
+        X,Y = self.GetSize()
         Y = Y-30
         if(X>=0):
             iniX = (X/2)-300
