@@ -1,33 +1,51 @@
 #Este es el main del proyecto
 from BraiNerdPanel import BraiNerdPanel
+from Electrodos import Electrodos
 import wx
 import wx.lib.agw.fourwaysplitter as fws
+from numpy import arange, sin, pi
+
 #Main manda llamar todos los demás modulos de python para que sean visibles y añadidos al procesamiento necesario para el correcto funcionamiento del programa.
 class Main(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, title = "Brainerds",size = (1000,800))
         splitter = wx.SplitterWindow(self)
         splitterTABD = fws.FourWaySplitter(splitter)
+        self.electrodos = Electrodos()
 
-        thetaPanel = BraiNerdPanel(splitterTABD)
-        alphaPanel = BraiNerdPanel(splitterTABD)
-        betaPanel = BraiNerdPanel(splitterTABD)
-        deltaPanel = BraiNerdPanel(splitterTABD)
+        self.thetaPanel = BraiNerdPanel(splitterTABD,)
+        self.alphaPanel = BraiNerdPanel(splitterTABD,)
+        self.betaPanel = BraiNerdPanel(splitterTABD,)
+        self.deltaPanel = BraiNerdPanel(splitterTABD,)
 
-        menuPanel = BraiNerdPanel(splitter)
-        splitter.SplitHorizontally(menuPanel, splitterTABD)
+        self.menuPanel = BraiNerdPanel(splitter)
+        splitter.SplitHorizontally(self.menuPanel, splitterTABD)
 
-        splitterTABD.AppendWindow(thetaPanel)
-        splitterTABD.AppendWindow(alphaPanel)
-        splitterTABD.AppendWindow(betaPanel)
-        splitterTABD.AppendWindow(deltaPanel)
+        splitterTABD.AppendWindow(self.thetaPanel)
+        splitterTABD.AppendWindow(self.alphaPanel)
+        splitterTABD.AppendWindow(self.betaPanel)
+        splitterTABD.AppendWindow(self.deltaPanel)
         splitter.SetMinimumPaneSize(120)
 
-        menuPanel.ShowMenuPanel()
-        thetaPanel.ShowThetaPanel()
-        alphaPanel.ShowAlphaPanel()
-        betaPanel.ShowBetaPanel()
-        deltaPanel.ShowDeltaPanel()
+        self.menuPanel.ShowMenuPanel()
+        self.thetaPanel.ShowThetaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
+        self.alphaPanel.ShowAlphaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
+        self.betaPanel.ShowBetaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
+        self.deltaPanel.ShowDeltaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
+        self.timer = wx.Timer(self)
+        self.Bind(wx.EVT_TIMER, self.TimeInterval, self.timer)
+        self.timer.Start(6)
+
+        self.wave = 0
+
+    def TimeInterval(self, event):
+        self.wave += 3*pi/360
+        self.thetaPanel.UpdateValues(self.wave)
+        self.alphaPanel.UpdateValues(self.wave)
+        self.betaPanel.UpdateValues(self.wave)
+        self.deltaPanel.UpdateValues(self.wave)
+        #print (self.electrodos.GetElectrodosAngle())
+
 
 #Comprueba que éste archivo sea el main ejecutable para poder ejecutarlo
 if __name__ == "__main__":
