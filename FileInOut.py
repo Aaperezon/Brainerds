@@ -4,13 +4,11 @@ from csv import reader
 
 class FileInOut():
     def __init__(self):
-        global file_location_Input
-        file_location_Input = "./InData.csv"
+        self.file_location_Input = "./InData.csv"
 
 	#Este metodo lee el archivo
     def ReadData(self):
-        global file_location_Input
-        file = open(file_location_Input, 'r')
+        file = open(self.file_location_Input, 'r')
         csv_reader = reader(file)
         # Iterate over each row after the header in the csv
         for row in csv_reader:
