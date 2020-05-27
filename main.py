@@ -52,26 +52,25 @@ class Main(wx.Frame):
         self.betaPanel.ShowMinimizarButton()
         self.deltaPanel.ShowMinimizarButton()
 
-
+    #interaccion con todos los botones de menu y las 'X' para los cuadrantes
     def OnButtonClicMinimizar(self, event):
         self.splitterTABD.SetHSplit(5000)
         self.splitterTABD.SetVSplit(5000)
     def OnButtonClickInicio(self, event):
-        print("inicio")
+        self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(255,0,0,0))
         self.Refresh()
     def OnButtonClickConfiguracion(self, event):
-        print("confi")
+        self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,255,0,0))
         self.Refresh()
     def OnButtonClickGuardar(self, event):
-        print("guardar")
+        self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,0,255,0))
         self.Refresh()
     def OnButtonClickPuntos(self, event):
-        print("puntosmon")
+        self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(255,255,255,0))
         self.Refresh()
-    def OnClickThetaPanel(self, e):
-        print("Clic ThetaPanel")
 
 
+    #se encarga de expandir cada cuadrante de visualizacion
     def OnClickThetaPanel(self, e):
         self.splitterTABD.SetHSplit(10000)
         self.splitterTABD.SetVSplit(10000)
@@ -89,12 +88,8 @@ class Main(wx.Frame):
         self.splitterTABD.SetVSplit(0)
         self.deltaPanel.GetMinimizarButton().on_clicked(self.OnButtonClicMinimizar)
 
-  
 
-
-
-
-
+    #ejecuciones que suceden en el intervalo de actualizacion del programa
     def TimeInterval(self, event):
         self.wave += 3*pi/360
         self.thetaPanel.UpdateValues(self.wave)

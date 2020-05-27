@@ -49,11 +49,7 @@ class BraiNerdPanel(wx.Panel):
         return self.guardar
     def PuntosMonButton(self):
         return self.puntosMon
-
-
    
-    def OnButton(self, event):
-        print("TExto nuevo")
 
     def UpdateMenu(self):
         X,Y = self.GetSize()
@@ -106,22 +102,18 @@ class BraiNerdPanel(wx.Panel):
         return self.canvas
     def GetPanel(self):
         return self
-    def next(self, event):
-        print ("mafmddad")
-
+    #inicializa el boton 'X' de todos los cuadrantes
     def ShowMinimizarButton(self):
         self.minimizar = Button(self.fig.add_axes([.95,.95,.05,.05]),"X")
-        
+    #retorna la varibale del boton 'X' para otra clase que lo quiera controlar
     def GetMinimizarButton(self):
         return self.minimizar
     #Mostrar el panel que contiene al primer cuadrante con la grafica que representa las ondas Theta.
     def ShowThetaPanel(self,angle,r):
-
         self.SetAngleElectrode(angle)
         self.SetRElectrode(r)
         self.PutGraphIn()
         self.ax.set_title("Theta Graph")
-       
     #Mostrar el panel que contiene al segundo cuadrante con la grafica que representa las ondas Alpha.
     def ShowAlphaPanel(self,angle,r):
         self.SetAngleElectrode(angle)
