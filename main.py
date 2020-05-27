@@ -5,7 +5,7 @@ import wx
 import wx.lib.agw.fourwaysplitter as fws
 from numpy import arange, sin, pi
 
-#Main manda llamar todos los demás modulos de python para que sean visibles y añadidos al procesamiento necesario para el correcto funcionamiento del programa.
+#Main manda llamar todos los demas modulos de python para que sean visibles y anadidos al procesamiento necesario para el correcto funcionamiento del programa.
 class Main(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, title = "Brainerds",size = (1000,800))
@@ -49,7 +49,7 @@ class Main(wx.Frame):
         #print (self.menuPanel.GetSize())
 
 
-#Comprueba que éste archivo sea el main ejecutable para poder ejecutarlo
+#Comprueba que este archivo sea el main ejecutable para poder ejecutarlo
 if __name__ == "__main__":
     app = wx.App()
     frame = Main()

@@ -1,4 +1,4 @@
-#Esta clase creea paneles  o pantallas que se visualizan con botones, graficas, imagenes, etc...
+#Esta clase crea paneles  o pantallas que se visualizan con botones, graficas, imagenes, etc...
 import wx
 import os
 import numpy as np
@@ -13,8 +13,8 @@ import matplotlib.image as mpimg
 
 
 
-#file = FileInOut()
-#file.ReadData()
+file = FileInOut()
+file.ReadData()
 
 class BraiNerdPanel(wx.Panel):
    
@@ -25,7 +25,7 @@ class BraiNerdPanel(wx.Panel):
         self.theta = 0
         
         
-    #Mostrar el panel que contiene al menú.
+    #Mostrar el panel que contiene al menu
     def ShowMenuPanel(self):
         self.SetBackgroundColour(wx.Colour(121,255,255,0))
         self.inicio = wx.Button(self, label="Inicio",pos=(200,90), size=(140, 25))
@@ -87,7 +87,7 @@ class BraiNerdPanel(wx.Panel):
         return self.r
 
     def PutGraphIn(self):
-        self.fig = Figure(figsize=[2,2]) #Grafica tamaño
+        self.fig = Figure(figsize=[2,2]) #Grafica tamano
         self.ax = self.fig.add_subplot(111, projection='polar') #puedo probar con ',facecolor='black'
         self.canvas = FigureCanvas(self, -1, self.fig)
         self.sizer  = wx.BoxSizer(wx.HORIZONTAL)
@@ -99,7 +99,7 @@ class BraiNerdPanel(wx.Panel):
         self.ax_image.axis('off')  # don't show the axes ticks/lines/etc. associated with the image
         self.ax.grid(False) # circulos internos de la grafica
         self.ax.set_yticklabels([]) #etiquedas de diagonar r
-        self.ax.set_xticklabels([]) # etiquetas de circunferencia grados°
+        self.ax.set_xticklabels([]) # etiquetas de circunferencia grados
         self.point = self.ax.scatter(self.GetAngleElectrode(),self.GetRElectrode(), c=np.zeros(32), s=(50), cmap='hsv', alpha=0) #dibuja la grafica
 
     def UpdateValues(self,intensity):

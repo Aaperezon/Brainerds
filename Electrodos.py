@@ -6,7 +6,7 @@ class Electrodos():
         self.electrodosAngle = np.zeros(32)
         self.electrodosR = np.zeros(32)
 
-        #Lista de la posicion de cada electrodo (Θ,r) coordenadas polares
+        #Lista de la posicion de cada electrodo (0,r) coordenadas polares
         #1
         self.electrodosAngle[0] = 0;
         self.electrodosR[0] = 0
