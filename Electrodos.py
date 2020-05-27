@@ -6,7 +6,7 @@ class Electrodos():
         self.electrodosAngle = np.zeros(32)
         self.electrodosR = np.zeros(32)
 
-        #Lista de la posicion de cada electrodo (0,r) coordenadas polares
+        #Lista de la posicion de cada electrodo (theta,r) coordenadas polares
         #1
         self.electrodosAngle[0] = 0;
         self.electrodosR[0] = 0
@@ -57,16 +57,16 @@ class Electrodos():
         self.electrodosR[15] = 3
         #17
         self.electrodosAngle[16] = pi/6;
-        self.electrodosR[16] = 4
+        self.electrodosR[16] = 3
         #18
         self.electrodosAngle[17] = 7*pi/6;
-        self.electrodosR[17] = 4
+        self.electrodosR[17] = 3
         #19
         self.electrodosAngle[18] = 4*pi/3;
-        self.electrodosR[18] = 4
+        self.electrodosR[18] = 3
         #20
         self.electrodosAngle[19] = 13*pi/6;
-        self.electrodosR[19] = 4
+        self.electrodosR[19] = 3
         #21
         self.electrodosAngle[20] = pi/6;
         self.electrodosR[20] = 5
@@ -92,17 +92,17 @@ class Electrodos():
         self.electrodosAngle[27] = 11*pi/6;
         self.electrodosR[27] = 5
         #29
-        self.electrodosAngle[28] = pi/3;
-        self.electrodosR[28] = 5
+        self.electrodosAngle[28] = pi/6;
+        self.electrodosR[28] = 6
         #30
-        self.electrodosAngle[29] = 7*pi/6;
-        self.electrodosR[29] = 5
+        self.electrodosAngle[29] = -pi/6;
+        self.electrodosR[29] = 6
         #31
-        self.electrodosAngle[30] = 4*pi/3;
-        self.electrodosR[30] = 5
+        self.electrodosAngle[30] = 7*pi/6;
+        self.electrodosR[30] = 6
         #32
-        self.electrodosAngle[31] = 13*pi/6;
-        self.electrodosR[31] = 5
+        self.electrodosAngle[31] = 5*pi/6;
+        self.electrodosR[31] = 6
 
 
 

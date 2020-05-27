@@ -10,21 +10,21 @@ class Main(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, title = "Brainerds",size = (1000,800))
         splitter = wx.SplitterWindow(self)
-        splitterTABD = fws.FourWaySplitter(splitter)
+        self.splitterTABD = fws.FourWaySplitter(splitter)
         self.electrodos = Electrodos()
 
-        self.thetaPanel = BraiNerdPanel(splitterTABD,)
-        self.alphaPanel = BraiNerdPanel(splitterTABD,)
-        self.betaPanel = BraiNerdPanel(splitterTABD,)
-        self.deltaPanel = BraiNerdPanel(splitterTABD,)
+        self.thetaPanel = BraiNerdPanel(self.splitterTABD,)
+        self.alphaPanel = BraiNerdPanel(self.splitterTABD,)
+        self.betaPanel = BraiNerdPanel(self.splitterTABD,)
+        self.deltaPanel = BraiNerdPanel(self.splitterTABD,)
 
         self.menuPanel = BraiNerdPanel(splitter)
-        splitter.SplitHorizontally(self.menuPanel, splitterTABD)
+        splitter.SplitHorizontally(self.menuPanel, self.splitterTABD)
 
-        splitterTABD.AppendWindow(self.thetaPanel)
-        splitterTABD.AppendWindow(self.alphaPanel)
-        splitterTABD.AppendWindow(self.betaPanel)
-        splitterTABD.AppendWindow(self.deltaPanel)
+        self.splitterTABD.AppendWindow(self.thetaPanel)
+        self.splitterTABD.AppendWindow(self.alphaPanel)
+        self.splitterTABD.AppendWindow(self.betaPanel)
+        self.splitterTABD.AppendWindow(self.deltaPanel)
         splitter.SetMinimumPaneSize(120)
 
 
@@ -33,11 +33,67 @@ class Main(wx.Frame):
         self.alphaPanel.ShowAlphaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
         self.betaPanel.ShowBetaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
         self.deltaPanel.ShowDeltaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
+
         self.timer = wx.Timer(self)
         self.Bind(wx.EVT_TIMER, self.TimeInterval, self.timer)
         self.timer.Start(6)
-
         self.wave = 0
+
+        self.Bind(wx.EVT_BUTTON, self.OnButtonClickInicio, self.menuPanel.InicioButton()) 
+        self.Bind(wx.EVT_BUTTON, self.OnButtonClickConfiguracion, self.menuPanel.ConfiguracionButton()) 
+        self.Bind(wx.EVT_BUTTON, self.OnButtonClickGuardar,self.menuPanel.GuardarButton()) 
+        self.Bind(wx.EVT_BUTTON, self.OnButtonClickPuntos,self.menuPanel.PuntosMonButton())
+        self.thetaPanel.GetCanvas().mpl_connect('button_press_event', self.OnClickThetaPanel)
+        self.alphaPanel.GetCanvas().mpl_connect('button_press_event', self.OnClickAlphaPanel)
+        self.betaPanel.GetCanvas().mpl_connect('button_press_event', self.OnClickBetaPanel)
+        self.deltaPanel.GetCanvas().mpl_connect('button_press_event', self.OnClickDeltaPanel)
+        self.thetaPanel.ShowMinimizarButton()
+        self.alphaPanel.ShowMinimizarButton()
+        self.betaPanel.ShowMinimizarButton()
+        self.deltaPanel.ShowMinimizarButton()
+
+
+    def OnButtonClicMinimizar(self, event):
+        self.splitterTABD.SetHSplit(5000)
+        self.splitterTABD.SetVSplit(5000)
+    def OnButtonClickInicio(self, event):
+        print("inicio")
+        self.Refresh()
+    def OnButtonClickConfiguracion(self, event):
+        print("confi")
+        self.Refresh()
+    def OnButtonClickGuardar(self, event):
+        print("guardar")
+        self.Refresh()
+    def OnButtonClickPuntos(self, event):
+        print("puntosmon")
+        self.Refresh()
+    def OnClickThetaPanel(self, e):
+        print("Clic ThetaPanel")
+
+
+    def OnClickThetaPanel(self, e):
+        self.splitterTABD.SetHSplit(10000)
+        self.splitterTABD.SetVSplit(10000)
+        self.thetaPanel.GetMinimizarButton().on_clicked(self.OnButtonClicMinimizar)
+    def OnClickAlphaPanel(self, e):
+        self.splitterTABD.SetHSplit(0)
+        self.splitterTABD.SetVSplit(10000)
+        self.alphaPanel.GetMinimizarButton().on_clicked(self.OnButtonClicMinimizar)
+    def OnClickBetaPanel(self, e):
+        self.splitterTABD.SetHSplit(10000)
+        self.splitterTABD.SetVSplit(0)
+        self.betaPanel.GetMinimizarButton().on_clicked(self.OnButtonClicMinimizar)
+    def OnClickDeltaPanel(self, e):
+        self.splitterTABD.SetHSplit(0)
+        self.splitterTABD.SetVSplit(0)
+        self.deltaPanel.GetMinimizarButton().on_clicked(self.OnButtonClicMinimizar)
+
+  
+
+
+
+
 
     def TimeInterval(self, event):
         self.wave += 3*pi/360
@@ -46,6 +102,7 @@ class Main(wx.Frame):
         self.betaPanel.UpdateValues(self.wave)
         self.deltaPanel.UpdateValues(self.wave)
         self.menuPanel.UpdateMenu()
+
         #print (self.menuPanel.GetSize())
 
 
