@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 from matplotlib.figure import Figure 
 
-from FileInOut import FileInOut
+
 import wx.lib.agw.buttonpanel as BP
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,9 +14,6 @@ import matplotlib.image as mpimg
 from matplotlib.widgets import Button
 
 
-
-#file = FileInOut()
-#file.ReadData()
 
 class BraiNerdPanel(wx.Panel):
    
@@ -30,7 +27,7 @@ class BraiNerdPanel(wx.Panel):
     def ShowMenuPanel(self):
         self.SetBackgroundColour(wx.Colour(121,255,255,0))
         self.inicio = wx.Button(self, label="Inicio",pos=(200,90), size=(140, 25))
-        self.configuracion = wx.Button(self, label='Configuracion',pos=(350, 90), size=(140, 25))
+        self.abrir = wx.Button(self, label='Abrir',pos=(350, 90), size=(140, 25))
         self.guardar = wx.Button(self, label='Guardar',pos=(500,90), size=(140, 25))
         self.puntosMon = wx.Button(self, label='Puntos de Monitoreo',pos=(650, 90), size=(140, 25))
 
@@ -43,8 +40,8 @@ class BraiNerdPanel(wx.Panel):
 
     def InicioButton(self):
         return self.inicio
-    def ConfiguracionButton(self):
-        return self.configuracion
+    def AbrirButton(self):
+        return self.abrir
     def GuardarButton(self):
         return self.guardar
     def PuntosMonButton(self):
@@ -56,11 +53,11 @@ class BraiNerdPanel(wx.Panel):
         Y = Y-30
         if(X>=0):
             iniX = (X/2)-300
-            confX = (X/2)-150
+            abrirX = (X/2)-150
             guaX = (X/2)+10
             ptsMonX = (X/2)+160
             self.inicio.SetPosition(wx.Point(iniX,Y))
-            self.configuracion.SetPosition(wx.Point(confX,Y))
+            self.abrir.SetPosition(wx.Point(abrirX,Y))
             self.guardar.SetPosition(wx.Point(guaX,Y))
             self.puntosMon.SetPosition(wx.Point(ptsMonX,Y))
             self.control.SetPosition(((X/2)-40, 0))

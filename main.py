@@ -5,9 +5,17 @@ import wx
 import wx.lib.agw.fourwaysplitter as fws
 from numpy import arange, sin, pi
 
+from FileInOut import FileInOut
+
 #Main manda llamar todos los demas modulos de python para que sean visibles y anadidos al procesamiento necesario para el correcto funcionamiento del programa.
 class Main(wx.Frame):
     def __init__(self):
+        
+
+        self.file = FileInOut()
+
+        
+
         wx.Frame.__init__(self, None, title = "Brainerds",size = (1000,800))
         splitter = wx.SplitterWindow(self)
         self.splitterTABD = fws.FourWaySplitter(splitter)
@@ -36,11 +44,11 @@ class Main(wx.Frame):
 
         self.timer = wx.Timer(self)
         self.Bind(wx.EVT_TIMER, self.TimeInterval, self.timer)
-        self.timer.Start(6)
+        self.timer.Start(1)
         self.wave = 0
 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickInicio, self.menuPanel.InicioButton()) 
-        self.Bind(wx.EVT_BUTTON, self.OnButtonClickConfiguracion, self.menuPanel.ConfiguracionButton()) 
+        self.Bind(wx.EVT_BUTTON, self.OnButtonClickAbrir, self.menuPanel.AbrirButton()) 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickGuardar,self.menuPanel.GuardarButton()) 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickPuntos,self.menuPanel.PuntosMonButton())
         self.thetaPanel.GetCanvas().mpl_connect('button_press_event', self.OnClickThetaPanel)
@@ -59,9 +67,11 @@ class Main(wx.Frame):
     def OnButtonClickInicio(self, event):
         self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(255,0,0,0))
         self.Refresh()
-    def OnButtonClickConfiguracion(self, event):
+    def OnButtonClickAbrir(self, event):
         self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,255,0,0))
+        self.file.OnOpen()
         self.Refresh()
+
     def OnButtonClickGuardar(self, event):
         self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,0,255,0))
         self.Refresh()
