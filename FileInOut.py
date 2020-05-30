@@ -2,20 +2,27 @@
 import csv
 from csv import reader
 import wx
+import pandas as pd
+import string
 class FileInOut():
     def __init__(self):
         self.file_location_Input = ""
-
+        self.rowCount = 0
 	#Este metodo lee el archivo
-    def ReadData(self,fileName):
-        file = open(fileName, 'r')
-        csv_reader = reader(file)
-        # Iterate over each row after the header in the csv
-        for row in csv_reader:
-        # row variable is a list that represents a row in csv
-            print(row)
-
-
+    def ReadData(self):
+        df = pd.read_csv(self.file_location_Input, skiprows=self.rowCount,nrows=0)
+        row = df.iloc[:,:]
+        row = list(row)
+        newList = []
+        a=1
+        for i in range (0,len(row)/4):
+            newList.append(row[a:a+4])
+            a+=4
+        #print (newList)
+        self.rowCount+=1
+        return zip(*newList)
+      
+    
     def OnOpen(self):
         frame = wx.Frame(None, -1, 'win.py')
         frame.SetDimensions(0,0,200,50)
@@ -29,6 +36,10 @@ class FileInOut():
         self.file_location_Input = openFileDialog.GetPath()
         #print(openFileDialog.GetPath())
         openFileDialog.Destroy()
-        self.ReadData(self.file_location_Input)
-
+        #return self.ReadData(self.file_location_Input)
+    def SelectedFile(self):
+        if (self.file_location_Input == ""):
+            return False
+        else:
+            return True
 

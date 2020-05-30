@@ -14,7 +14,6 @@ class Main(wx.Frame):
 
         self.file = FileInOut()
 
-        
 
         wx.Frame.__init__(self, None, title = "Brainerds",size = (1000,800))
         splitter = wx.SplitterWindow(self)
@@ -37,14 +36,14 @@ class Main(wx.Frame):
 
 
         self.menuPanel.ShowMenuPanel()
-        self.thetaPanel.ShowThetaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
-        self.alphaPanel.ShowAlphaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
-        self.betaPanel.ShowBetaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
-        self.deltaPanel.ShowDeltaPanel(self.electrodos.GetAngleElectrode(),self.electrodos.GetRElectrode())
+        self.thetaPanel.ShowThetaPanel(self.electrodos.GetElectrodeInfo())
+        self.alphaPanel.ShowAlphaPanel(self.electrodos.GetElectrodeInfo())
+        self.betaPanel.ShowBetaPanel(self.electrodos.GetElectrodeInfo())
+        self.deltaPanel.ShowDeltaPanel(self.electrodos.GetElectrodeInfo())
 
         self.timer = wx.Timer(self)
         self.Bind(wx.EVT_TIMER, self.TimeInterval, self.timer)
-        self.timer.Start(1)
+        self.timer.Start(6)
         self.wave = 0
 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickInicio, self.menuPanel.InicioButton()) 
@@ -69,7 +68,10 @@ class Main(wx.Frame):
         self.Refresh()
     def OnButtonClickAbrir(self, event):
         self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,255,0,0))
-        self.file.OnOpen()
+        if(self.file.SelectedFile()==False):
+            self.file.OnOpen()
+        else:
+            print (self.file.ReadData()[3])
         self.Refresh()
 
     def OnButtonClickGuardar(self, event):

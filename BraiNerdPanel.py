@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from matplotlib.widgets import Button
+import  cStringIO
 
 
 
@@ -30,14 +31,22 @@ class BraiNerdPanel(wx.Panel):
         self.abrir = wx.Button(self, label='Abrir',pos=(350, 90), size=(140, 25))
         self.guardar = wx.Button(self, label='Guardar',pos=(500,90), size=(140, 25))
         self.puntosMon = wx.Button(self, label='Puntos de Monitoreo',pos=(650, 90), size=(140, 25))
-
+        
+        bitmap = wx.Bitmap('LogoB.jpg')
+        image = wx.ImageFromBitmap(bitmap)
+        image = image.Scale(80, 80, wx.IMAGE_QUALITY_HIGH)
+        result = wx.BitmapFromImage(image)
+        self.control = wx.StaticBitmap(self, -1, result)
+        self.control.SetPosition((10, 10))
+       
+    """
         bitmap = wx.Bitmap('LogoB.jpg')
         image = wx.ImageFromBitmap(bitmap)
         image = image.Scale(80, 80, wx.IMAGE_QUALITY_HIGH)
         result = wx.BitmapFromImage(image)
         self.control = wx.StaticBitmap(self, -1, result)
         self.control.SetPosition((450, 0))
-
+"""
     def InicioButton(self):
         return self.inicio
     def AbrirButton(self):
@@ -77,7 +86,7 @@ class BraiNerdPanel(wx.Panel):
     def PutGraphIn(self):
         self.fig = Figure(figsize=[2,2]) #Grafica tamano
         self.ax = self.fig.add_subplot(111, projection='polar') #puedo probar con ',facecolor='black'
-        self.canvas = FigureCanvas(self, -1, self.fig)
+        self.canvas = FigureCanvas(self, 1, self.fig)
         self.sizer  = wx.BoxSizer(wx.HORIZONTAL)
         self.sizer.Add(self.canvas, 1, wx.EXPAND)
         self.SetSizer(self.sizer)
@@ -106,27 +115,27 @@ class BraiNerdPanel(wx.Panel):
     def GetMinimizarButton(self):
         return self.minimizar
     #Mostrar el panel que contiene al primer cuadrante con la grafica que representa las ondas Theta.
-    def ShowThetaPanel(self,angle,r):
-        self.SetAngleElectrode(angle)
-        self.SetRElectrode(r)
+    def ShowThetaPanel(self,info):
+        self.SetAngleElectrode(info[2])
+        self.SetRElectrode(info[1])
         self.PutGraphIn()
         self.ax.set_title("Theta Graph")
     #Mostrar el panel que contiene al segundo cuadrante con la grafica que representa las ondas Alpha.
-    def ShowAlphaPanel(self,angle,r):
-        self.SetAngleElectrode(angle)
-        self.SetRElectrode(r)
+    def ShowAlphaPanel(self,info):
+        self.SetAngleElectrode(info[2])
+        self.SetRElectrode(info[1])
         self.PutGraphIn()
         self.ax.set_title("Alpha Graph")
     #Mostrar el panel que contiene al tercer cuadrante con la grafica que representa las ondas Beta.
-    def ShowBetaPanel(self,angle,r):
-        self.SetAngleElectrode(angle)
-        self.SetRElectrode(r)
+    def ShowBetaPanel(self,info):
+        self.SetAngleElectrode(info[2])
+        self.SetRElectrode(info[1])
         self.PutGraphIn()
         self.ax.set_title("Beta Graph")
     #Mostrar el panel que contiene al cuarto cuadrante con la grafica que representa las ondas Delta.
-    def ShowDeltaPanel(self,angle,r):
-        self.SetAngleElectrode(angle)
-        self.SetRElectrode(r)
+    def ShowDeltaPanel(self,info):
+        self.SetAngleElectrode(info[2])
+        self.SetRElectrode(info[1])
         self.PutGraphIn()
         self.ax.set_title("Delta Graph")
 
