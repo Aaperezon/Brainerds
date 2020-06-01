@@ -43,3 +43,12 @@ class FileInOut():
         else:
             return True
 
+    def PrintData(self):
+        
+        data = [0.125, 0.128, 0.122, 0.028, 5.052, 8.248] #Los datos estan aqui
+
+        with open('OutData.csv', mode = 'w') as csv_file:
+            dataWriter = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+            dataWriter.writerow(data)       #Estos datos son guardados
+

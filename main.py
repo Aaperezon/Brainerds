@@ -65,6 +65,7 @@ class Main(wx.Frame):
         self.splitterTABD.SetVSplit(5000)
     def OnButtonClickInicio(self, event):
         self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(255,0,0,0))
+        self.file.PrintData()
         self.Refresh()
     def OnButtonClickAbrir(self, event):
         self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,255,0,0))
