@@ -4,6 +4,7 @@ from csv import reader
 import wx
 import pandas as pd
 import string
+
 class FileInOut():
     def __init__(self):
         self.file_location_Input = ""
@@ -21,7 +22,6 @@ class FileInOut():
         #print (newList)
         self.rowCount+=1
         return zip(*newList)
-      
     
     def OnOpen(self):
         frame = wx.Frame(None, -1, 'win.py')
@@ -42,4 +42,12 @@ class FileInOut():
             return False
         else:
             return True
+    
+    def PrintData(self):
+        
+        data = [0.125, 0.128, 0.122, 0.028, 5.052, 8.248] #Los datos estan aqui
 
+        with open('OutData.csv', mode = 'w') as csv_file:
+            dataWriter = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+            dataWriter.writerow(data)       #Estos datos son guardados

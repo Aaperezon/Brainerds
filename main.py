@@ -34,7 +34,6 @@ class Main(wx.Frame):
         self.splitterTABD.AppendWindow(self.deltaPanel)
         splitter.SetMinimumPaneSize(120)
 
-
         self.menuPanel.ShowMenuPanel()
         self.thetaPanel.ShowThetaPanel(self.electrodos.GetElectrodeInfo())
         self.alphaPanel.ShowAlphaPanel(self.electrodos.GetElectrodeInfo())
@@ -66,6 +65,7 @@ class Main(wx.Frame):
     def OnButtonClickInicio(self, event):
         self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(255,0,0,0))
         self.Refresh()
+        self.file.PrintData()
     def OnButtonClickAbrir(self, event):
         self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,255,0,0))
         if(self.file.SelectedFile()==False):
