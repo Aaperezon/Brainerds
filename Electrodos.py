@@ -8,16 +8,16 @@ class Electrodos():
         self.electrodosName = []
         self.electrodosInfo = []
         #Lista de la posicion de cada electrodo (theta,r) coordenadas polares
-        #1
+         #1
         self.electrodosName.append('Fp1')
         self.electrodosAngle[0] = 0;
         self.electrodosR[0] = 0
         #2
-        self.electrodosName.append('AF3')
+        self.electrodosName.append('AF3')      
         self.electrodosAngle[1] = 3*pi/2;
         self.electrodosR[1] = 2
         #3
-        self.electrodosName.append('F3')
+        self.electrodosName.append('F3')           
         self.electrodosAngle[2] = 3*pi/2;
         self.electrodosR[2] = 4
         #4
@@ -72,10 +72,10 @@ class Electrodos():
         self.electrodosName.append('Pz')
         self.electrodosAngle[15] = 11*pi/6;
         self.electrodosR[15] = 3
-        #17
+        #17                                      
         self.electrodosName.append('Fp2')
-        self.electrodosAngle[16] = pi/6;
-        self.electrodosR[16] = 3
+        self.electrodosAngle[16] = pi/3;
+        self.electrodosR[16] = 5
         #18
         self.electrodosName.append('AF4')
         self.electrodosAngle[17] = 7*pi/6;
@@ -89,9 +89,9 @@ class Electrodos():
         self.electrodosAngle[19] = 13*pi/6;
         self.electrodosR[19] = 3
         #21
-        self.electrodosName.append('F8')
-        self.electrodosAngle[20] = pi/6;
-        self.electrodosR[20] = 5
+        self.electrodosName.append('F8')        #Este
+        self.electrodosAngle[20] = pi/3;
+        self.electrodosR[20] = 3
         #22
         self.electrodosName.append('FC6')
         self.electrodosAngle[21] = 7*pi/6;
