@@ -38,16 +38,9 @@ class BraiNerdPanel(wx.Panel):
         image = image.Scale(80, 80, wx.IMAGE_QUALITY_HIGH)
         result = wx.BitmapFromImage(image)
         self.control = wx.StaticBitmap(self, -1, result)
-        self.control.SetPosition((10, 10))
-       
-    """
-        bitmap = wx.Bitmap('LogoB.jpg')
-        image = wx.ImageFromBitmap(bitmap)
-        image = image.Scale(80, 80, wx.IMAGE_QUALITY_HIGH)
-        result = wx.BitmapFromImage(image)
-        self.control = wx.StaticBitmap(self, -1, result)
         self.control.SetPosition((450, 0))
-"""
+       
+   
     def InicioButton(self):
         return self.inicio
     def AbrirButton(self):
@@ -96,7 +89,7 @@ class BraiNerdPanel(wx.Panel):
         self.ax_image.imshow(self.pic, alpha=.5)
         self.ax_image.axis('off')  # don't show the axes ticks/lines/etc. associated with the image
         self.ax.grid(False) # circulos internos de la grafica
-        self.ax.set_yticklabels([]) #etiquedas de diagonar r
+        self.ax.set_yticklabels([]) # etiquetas de diagonar r
         self.ax.set_xticklabels([]) # etiquetas de circunferencia grados
         self.point = self.ax.scatter(self.GetAngleElectrode(),self.GetRElectrode(), c=np.zeros(32), s=(100), cmap='hsv', alpha=0) #dibuja la grafica
 

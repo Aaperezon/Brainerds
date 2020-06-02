@@ -39,6 +39,8 @@ class FileInOut():
     
     def OnOpen(self):
         self.file_location_Input = ""
+        self.rowCount = 0
+        self.row = []
         frame = wx.Frame(None, -1, 'win.py')
         frame.SetDimensions(0,0,200,50)
         # Create open file dialog
