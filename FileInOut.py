@@ -8,25 +8,39 @@ class FileInOut():
     def __init__(self):
         self.file_location_Input = ""
         self.rowCount = 0
+        self.row = []
 	#Este metodo lee el archivo
     def ReadData(self):
-        df = pd.read_csv(self.file_location_Input, skiprows=self.rowCount,nrows=0)
-        row = df.iloc[:,:]
-        row = list(row)
-        newList = []
-        a=1
-        for i in range (0,len(row)/4):
-            newList.append(row[a:a+4])
-            a+=4
-        #print (newList)
-        self.rowCount+=1
-        return zip(*newList)
-      
+        try:
+            fileL = open(self.file_location_Input,'r')
+            reader = csv.reader(fileL)
+            row=list(reader)
+            row = row[self.rowCount]
+            newList = []
+            a=1
+            for i in range (0,len(row)/4):
+                newList.append(row[a:a+4])
+                a+=4
+            zip(*newList)
+            self.row = zip(*newList)
+            self.rowCount+=1
+        except:
+            self.file_location_Input = ""
+
+    def GetThetaData(self):
+        return self.row[0]
+    def GetAlphaData(self):
+        return self.row[1]
+    def GetBetaData(self):
+        return self.row[2]
+    def GetDeltaData(self):
+        return self.row[3]
+
     
     def OnOpen(self):
+        self.file_location_Input = ""
         frame = wx.Frame(None, -1, 'win.py')
         frame.SetDimensions(0,0,200,50)
-
         # Create open file dialog
         openFileDialog = wx.FileDialog(frame, "Seleccion de archivo", "", "", 
             "Python files (*.csv)|*.csv", 

@@ -36,15 +36,14 @@ class Main(wx.Frame):
 
 
         self.menuPanel.ShowMenuPanel()
-        self.thetaPanel.ShowThetaPanel(self.electrodos.GetElectrodeInfo())
-        self.alphaPanel.ShowAlphaPanel(self.electrodos.GetElectrodeInfo())
-        self.betaPanel.ShowBetaPanel(self.electrodos.GetElectrodeInfo())
-        self.deltaPanel.ShowDeltaPanel(self.electrodos.GetElectrodeInfo())
+        self.thetaPanel.ShowGraphPanel(self.electrodos.GetElectrodeInfo(),"Theta Graph")
+        self.alphaPanel.ShowGraphPanel(self.electrodos.GetElectrodeInfo(), "Alpha Graph")
+        self.betaPanel.ShowGraphPanel(self.electrodos.GetElectrodeInfo(), "Beta Graph")
+        self.deltaPanel.ShowGraphPanel(self.electrodos.GetElectrodeInfo(), "Delta Graph")
 
         self.timer = wx.Timer(self)
         self.Bind(wx.EVT_TIMER, self.TimeInterval, self.timer)
         self.timer.Start(6)
-        self.wave = 0
 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickInicio, self.menuPanel.InicioButton()) 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickAbrir, self.menuPanel.AbrirButton()) 
@@ -69,10 +68,7 @@ class Main(wx.Frame):
         self.Refresh()
     def OnButtonClickAbrir(self, event):
         self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,255,0,0))
-        if(self.file.SelectedFile()==False):
-            self.file.OnOpen()
-        else:
-            print (self.file.ReadData()[3])
+        self.file.OnOpen()
         self.Refresh()
 
     def OnButtonClickGuardar(self, event):
@@ -104,13 +100,19 @@ class Main(wx.Frame):
 
     #ejecuciones que suceden en el intervalo de actualizacion del programa
     def TimeInterval(self, event):
-        self.wave += 3*pi/360
-        self.thetaPanel.UpdateValues(self.wave)
-        self.alphaPanel.UpdateValues(self.wave)
-        self.betaPanel.UpdateValues(self.wave)
-        self.deltaPanel.UpdateValues(self.wave)
         self.menuPanel.UpdateMenu()
-
+        self.file.ReadData()
+        if(self.file.SelectedFile()==True):
+            self.thetaPanel.UpdateValues(self.file.GetThetaData())
+            self.alphaPanel.UpdateValues(self.file.GetAlphaData())
+            self.betaPanel.UpdateValues(self.file.GetBetaData())
+            self.deltaPanel.UpdateValues(self.file.GetDeltaData())
+            """
+            print (self.file.GetThetaData())
+            print (self.file.GetAlphaData())
+            print (self.file.GetBetaData())
+            print (self.file.GetDeltaData())
+            """
         #print (self.menuPanel.GetSize())
 
 

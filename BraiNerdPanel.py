@@ -22,6 +22,7 @@ class BraiNerdPanel(wx.Panel):
         wx.Panel.__init__(self,parent)
         self.r = 0
         self.theta = 0
+        self.color = []
         
         
     #Mostrar el panel que contiene al menu
@@ -97,13 +98,29 @@ class BraiNerdPanel(wx.Panel):
         self.ax.grid(False) # circulos internos de la grafica
         self.ax.set_yticklabels([]) #etiquedas de diagonar r
         self.ax.set_xticklabels([]) # etiquetas de circunferencia grados
-        self.point = self.ax.scatter(self.GetAngleElectrode(),self.GetRElectrode(), c=np.zeros(32), s=(50), cmap='hsv', alpha=0) #dibuja la grafica
+        self.point = self.ax.scatter(self.GetAngleElectrode(),self.GetRElectrode(), c=np.zeros(32), s=(100), cmap='hsv', alpha=0) #dibuja la grafica
 
-    def UpdateValues(self,intensity):
+    def UpdateValues(self,dataIn):
         self.fig.canvas.draw()
         self.point.remove()
-        self.point = self.ax.scatter(self.GetAngleElectrode(),self.GetRElectrode(), c=np.zeros(32), s=(50), cmap='hsv', alpha = intensity) #dibuja la grafica
-
+        for a in dataIn:
+            a = float(a)
+            if (a >= 0.0 and a <= 0.142858):
+                self.color.append('blue')
+            elif (a > 0.142858 and a <= 0.428572):
+                self.color.append('cyan')
+            elif (a > 0.428572 and a <= 0.571429):
+                self.color.append('lightgreen')
+            elif (a > 0.571429 and a <= 0.724285):
+                self.color.append('yellow')
+            elif (a > 0.724285 and a <= 0.867142):
+                self.color.append('orange')
+            elif (a > 0.867142):
+                self.color.append('red')
+        #print (self.color)
+        self.point = self.ax.scatter(self.GetAngleElectrode(),self.GetRElectrode(), c=self.color, s=(100), cmap='hsv', alpha = 1) #dibuja la grafica
+        self.color = []
+        
     def GetCanvas(self):
         return self.canvas
     def GetPanel(self):
@@ -114,33 +131,9 @@ class BraiNerdPanel(wx.Panel):
     #retorna la varibale del boton 'X' para otra clase que lo quiera controlar
     def GetMinimizarButton(self):
         return self.minimizar
-    #Mostrar el panel que contiene al primer cuadrante con la grafica que representa las ondas Theta.
-    def ShowThetaPanel(self,info):
+    #Mostrar el panel que contiene el cuadrante con la grafica.
+    def ShowGraphPanel(self,info,nameGraph):
         self.SetAngleElectrode(info[2])
         self.SetRElectrode(info[1])
         self.PutGraphIn()
-        self.ax.set_title("Theta Graph")
-    #Mostrar el panel que contiene al segundo cuadrante con la grafica que representa las ondas Alpha.
-    def ShowAlphaPanel(self,info):
-        self.SetAngleElectrode(info[2])
-        self.SetRElectrode(info[1])
-        self.PutGraphIn()
-        self.ax.set_title("Alpha Graph")
-    #Mostrar el panel que contiene al tercer cuadrante con la grafica que representa las ondas Beta.
-    def ShowBetaPanel(self,info):
-        self.SetAngleElectrode(info[2])
-        self.SetRElectrode(info[1])
-        self.PutGraphIn()
-        self.ax.set_title("Beta Graph")
-    #Mostrar el panel que contiene al cuarto cuadrante con la grafica que representa las ondas Delta.
-    def ShowDeltaPanel(self,info):
-        self.SetAngleElectrode(info[2])
-        self.SetRElectrode(info[1])
-        self.PutGraphIn()
-        self.ax.set_title("Delta Graph")
-
-    
-
-
-    
-       
+        self.ax.set_title(nameGraph)
