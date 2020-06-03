@@ -23,22 +23,28 @@ class BraiNerdPanel(wx.Panel):
         self.r = 0
         self.theta = 0
         self.color = []
+        self.SetBackgroundColour(wx.Colour(110,173,254,0))
         
         
     #Mostrar el panel que contiene al menu
     def ShowMenuPanel(self):
-        self.SetBackgroundColour(wx.Colour(121,255,255,0))
-        self.inicio = wx.Button(self, label="Inicio",pos=(200,90), size=(140, 25))
-        self.abrir = wx.Button(self, label='Abrir',pos=(350, 90), size=(140, 25))
-        self.guardar = wx.Button(self, label='Guardar',pos=(500,90), size=(140, 25))
-        self.puntosMon = wx.Button(self, label='Puntos de Monitoreo',pos=(650, 90), size=(140, 25))
-        
-        bitmap = wx.Bitmap('LogoB.jpg')
+        self.inicio = wx.Button(self, label="Inicio",pos=(200,80), size=(140, 25))
+        self.abrir = wx.Button(self, label='Abrir',pos=(350, 80), size=(140, 25))
+        self.guardar = wx.Button(self, label='Guardar',pos=(500,80), size=(140, 25))
+        self.puntosMon = wx.Button(self, label='Puntos de Monitoreo',pos=(650, 80), size=(140, 25))
+
+        font = wx.Font(10, wx.SCRIPT, wx.NORMAL, wx.NORMAL, 0, "")
+        self.inicio.SetFont(font)
+        self.abrir.SetFont(font)
+        self.guardar.SetFont(font)
+        self.puntosMon.SetFont(font)
+
+        bitmap = wx.Bitmap('./img_src/BrainNerds150x60.png')
         image = wx.ImageFromBitmap(bitmap)
-        image = image.Scale(80, 80, wx.IMAGE_QUALITY_HIGH)
+        image = image.Scale(150, 60, wx.IMAGE_QUALITY_HIGH)
         result = wx.BitmapFromImage(image)
         self.control = wx.StaticBitmap(self, -1, result)
-        self.control.SetPosition((450, 0))
+        self.control.SetPosition((450, 10))
        
    
     def InicioButton(self):
@@ -53,7 +59,7 @@ class BraiNerdPanel(wx.Panel):
 
     def UpdateMenu(self):
         X,Y = self.GetSize()
-        Y = Y-30
+        Y = Y-40
         if(X>=0):
             iniX = (X/2)-300
             abrirX = (X/2)-150
@@ -63,7 +69,7 @@ class BraiNerdPanel(wx.Panel):
             self.abrir.SetPosition(wx.Point(abrirX,Y))
             self.guardar.SetPosition(wx.Point(guaX,Y))
             self.puntosMon.SetPosition(wx.Point(ptsMonX,Y))
-            self.control.SetPosition(((X/2)-40, 0))
+            self.control.SetPosition(((X/2)-75, 10))
        
   
 
@@ -79,22 +85,26 @@ class BraiNerdPanel(wx.Panel):
 
     def PutGraphIn(self):
         self.fig = Figure(figsize=[2,2]) #Grafica tamano
+        self.pic = plt.imread('./img_src/Cerebro.png') #imagen de fondo del cerebro
+        self.ax_image = self.fig.add_axes([.06,.1,.9,.8], label="ax image")
+        self.ax_image.imshow(self.pic, alpha=.6)
+        self.ax_image.axis('off')  # don't show the axes ticks/lines/etc. associated with the image
+
         self.ax = self.fig.add_subplot(111, projection='polar') #puedo probar con ',facecolor='black'
+        self.ax.patch.set_alpha(0)
         self.canvas = FigureCanvas(self, 1, self.fig)
         self.sizer  = wx.BoxSizer(wx.HORIZONTAL)
         self.sizer.Add(self.canvas, 1, wx.EXPAND)
         self.SetSizer(self.sizer)
-        self.pic = plt.imread('Cerebro.png') #imagen de fondo del cerebro
-        self.ax_image = self.fig.add_axes([.06,.1,.9,.8], label="ax image")
-        self.ax_image.imshow(self.pic, alpha=.5)
-        self.ax_image.axis('off')  # don't show the axes ticks/lines/etc. associated with the image
         self.ax.grid(False) # circulos internos de la grafica
         self.ax.set_yticklabels([]) # etiquetas de diagonar r
         self.ax.set_xticklabels([]) # etiquetas de circunferencia grados
-        self.point = self.ax.scatter(self.GetAngleElectrode(),self.GetRElectrode(), c=np.zeros(32), s=(100), cmap='hsv', alpha=0) #dibuja la grafica
+        self.point = self.ax.scatter(self.GetAngleElectrode(),self.GetRElectrode(), c=np.zeros(32), s=(100), cmap='hsv', alpha=1) #dibuja la grafica
 
     def UpdateValues(self,dataIn):
         self.fig.canvas.draw()
+        self.SetBackgroundColour(wx.Colour(110,173,254,0))
+
         self.point.remove()
         for a in dataIn:
             a = float(a)
@@ -112,7 +122,9 @@ class BraiNerdPanel(wx.Panel):
                 self.color.append('red')
         #print (self.color)
         self.point = self.ax.scatter(self.GetAngleElectrode(),self.GetRElectrode(), c=self.color, s=(100), cmap='hsv', alpha = 1) #dibuja la grafica
+
         self.color = []
+
         
     def GetCanvas(self):
         return self.canvas
@@ -129,4 +141,5 @@ class BraiNerdPanel(wx.Panel):
         self.SetAngleElectrode(info[2])
         self.SetRElectrode(info[1])
         self.PutGraphIn()
-        self.ax.set_title(nameGraph)
+        titleFont = {'fontname':'Arial'}
+        self.ax.set_title(nameGraph,fontsize= 15,**titleFont)

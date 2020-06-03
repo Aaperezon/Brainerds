@@ -63,19 +63,15 @@ class Main(wx.Frame):
         self.splitterTABD.SetHSplit(5000)
         self.splitterTABD.SetVSplit(5000)
     def OnButtonClickInicio(self, event):
-        self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(255,0,0,0))
         self.file.PrintData()
         self.Refresh()
     def OnButtonClickAbrir(self, event):
-        self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,255,0,0))
         self.file.OnOpen()
         self.Refresh()
 
     def OnButtonClickGuardar(self, event):
-        self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(0,0,255,0))
         self.Refresh()
     def OnButtonClickPuntos(self, event):
-        self.menuPanel.GetPanel().SetBackgroundColour(wx.Colour(255,255,255,0))
         self.Refresh()
 
 
