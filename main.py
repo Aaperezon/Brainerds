@@ -15,7 +15,7 @@ class Main(wx.Frame):
         self.file = FileInOut()
 
 
-        wx.Frame.__init__(self, None, title = "Brainerds",size = (1000,800))
+        wx.Frame.__init__(self, None, title = "BrainNerds",size = (1000,800))
         splitter = wx.SplitterWindow(self)
         self.splitterTABD = fws.FourWaySplitter(splitter)
         self.electrodos = Electrodos()
@@ -81,7 +81,7 @@ class Main(wx.Frame):
         self.splitterTABD.SetVSplit(10000)
         self.thetaPanel.GetMinimizarButton().on_clicked(self.OnButtonClicMinimizar)
     def OnClickAlphaPanel(self, e):
-        self.splitterTABD.SetHSplit(0)
+        self.splitterTABD.SetHSplit(1)
         self.splitterTABD.SetVSplit(10000)
         self.alphaPanel.GetMinimizarButton().on_clicked(self.OnButtonClicMinimizar)
     def OnClickBetaPanel(self, e):
