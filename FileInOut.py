@@ -17,6 +17,7 @@ class FileInOut():
             row=list(reader)
             row = row[self.rowCount]
             newList = []
+            newList.append(row[0:4])
             a=1
             for i in range (0,len(row)/4):
                 newList.append(row[a:a+4])
@@ -26,7 +27,8 @@ class FileInOut():
             self.rowCount+=1
         except:
             self.file_location_Input = ""
-
+    def GetTimeData(self):
+        return self.row[0][0]
     def GetThetaData(self):
         return self.row[0]
     def GetAlphaData(self):

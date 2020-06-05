@@ -43,7 +43,7 @@ class Main(wx.Frame):
 
         self.timer = wx.Timer(self)
         self.Bind(wx.EVT_TIMER, self.TimeInterval, self.timer)
-        self.timer.Start(6)
+        self.timer.Start(120)
 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickInicio, self.menuPanel.InicioButton()) 
         self.Bind(wx.EVT_BUTTON, self.OnButtonClickAbrir, self.menuPanel.AbrirButton()) 
@@ -99,11 +99,13 @@ class Main(wx.Frame):
         self.menuPanel.UpdateMenu()
         self.file.ReadData()
         if(self.file.SelectedFile()==True):
+            self.menuPanel.UpdateTime(self.file.GetTimeData())
             self.thetaPanel.UpdateValues(self.file.GetThetaData())
             self.alphaPanel.UpdateValues(self.file.GetAlphaData())
             self.betaPanel.UpdateValues(self.file.GetBetaData())
             self.deltaPanel.UpdateValues(self.file.GetDeltaData())
             """
+            print (self.file.GetTimeDa())
             print (self.file.GetThetaData())
             print (self.file.GetAlphaData())
             print (self.file.GetBetaData())

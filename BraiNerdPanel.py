@@ -45,7 +45,9 @@ class BraiNerdPanel(wx.Panel):
         result = wx.BitmapFromImage(image)
         self.control = wx.StaticBitmap(self, -1, result)
         self.control.SetPosition((450, 10))
-       
+
+        self.textTime = wx.StaticText(self, -1, "Tiempo de lectura: 0 s.", pos=(20, 50))
+
    
     def InicioButton(self):
         return self.inicio
@@ -70,7 +72,11 @@ class BraiNerdPanel(wx.Panel):
             self.guardar.SetPosition(wx.Point(guaX,Y))
             self.puntosMon.SetPosition(wx.Point(ptsMonX,Y))
             self.control.SetPosition(((X/2)-75, 10))
+        
        
+    def UpdateTime(self,time):
+        a = "Tiempo de lectura: "+str(time)
+        self.textTime.SetLabelText(a)
   
 
     def SetAngleElectrode(self, angle):
@@ -108,7 +114,6 @@ class BraiNerdPanel(wx.Panel):
 
     def UpdateValues(self,dataIn):
         self.fig.canvas.draw()
-        self.SetBackgroundColour(wx.Colour(110,173,254,0))
 
         self.point.remove()
         for a in dataIn:
