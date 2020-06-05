@@ -90,6 +90,11 @@ class BraiNerdPanel(wx.Panel):
         self.ax_image.imshow(self.pic, alpha=.6)
         self.ax_image.axis('off')  # don't show the axes ticks/lines/etc. associated with the image
 
+        self.pic2 = plt.imread('./img_src/paletaRGB.png') #imagen de la escala RGB
+        self.ax_image2 = self.fig.add_axes([.5,.2,.8,.7], label="ax image")
+        self.ax_image2.imshow(self.pic2, alpha=1)
+        self.ax_image2.axis('off')  # don't show the axes ticks/lines/etc. associated with the image
+
         self.ax = self.fig.add_subplot(111, projection='polar') #puedo probar con ',facecolor='black'
         self.ax.patch.set_alpha(0)
         self.canvas = FigureCanvas(self, 1, self.fig)
